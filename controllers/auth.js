@@ -5,6 +5,13 @@ import jwt from 'jsonwebtoken';
 import User from '../models/user.js';
 
 const signup = (req, res, next) => {
+    // Validate that email and password are provided
+    if (!req.body.password) {
+        return res.status(400).json({message: "password not provided"});
+    } else if (!req.body.email) {
+        return res.status(400).json({message: "email not provided"});
+    }
+    
     // checks if email already exists
     User.findOne({ where : {
         email: req.body.email, 
@@ -32,10 +39,6 @@ const signup = (req, res, next) => {
                     });
                 };
             });
-        } else if (!req.body.password) {
-            return res.status(400).json({message: "password not provided"});
-        } else if (!req.body.email) {
-            return res.status(400).json({message: "email not provided"});
         };
     })
     .catch(err => {
@@ -44,6 +47,12 @@ const signup = (req, res, next) => {
 };
 
 const login = (req, res, next) => {
+    // Validate that email and password are provided
+    if (!req.body.password) {
+        return res.status(400).json({message: "password not provided"});
+    } else if (!req.body.email) {
+        return res.status(400).json({message: "email not provided"});
+    }
     // checks if email exists
     User.findOne({ where : {
         email: req.body.email, 
