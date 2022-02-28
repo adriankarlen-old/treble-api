@@ -2,8 +2,10 @@ import { Sequelize } from 'sequelize';
 
 import sequelize from '../utils/database.js';
 
-const User = sequelize.define(
-    'users',
+import Team from './team.js';
+
+const Player = sequelize.define(
+    'players',
     {
         id: {
             type: Sequelize.INTEGER,
@@ -11,14 +13,11 @@ const User = sequelize.define(
             allowNull: false,
             primaryKey: true,
         },
-        email: {
+        name: {
             type: Sequelize.STRING,
             allowNull: false,
         },
-        name: {
-            type: Sequelize.STRING,
-        },
-        password: {
+        position: {
             type: Sequelize.STRING,
             allowNull: false,
         },
@@ -26,4 +25,7 @@ const User = sequelize.define(
     { freezeTableName: true, paranoid: true }
 );
 
-export default User;
+// 1-n relationship
+Player.belongsTo(Team);
+
+export default Player;

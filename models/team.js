@@ -2,8 +2,8 @@ import { Sequelize } from 'sequelize';
 
 import sequelize from '../utils/database.js';
 
-const User = sequelize.define(
-    'users',
+const Team = sequelize.define(
+    'teams',
     {
         id: {
             type: Sequelize.INTEGER,
@@ -11,14 +11,7 @@ const User = sequelize.define(
             allowNull: false,
             primaryKey: true,
         },
-        email: {
-            type: Sequelize.STRING,
-            allowNull: false,
-        },
         name: {
-            type: Sequelize.STRING,
-        },
-        password: {
             type: Sequelize.STRING,
             allowNull: false,
         },
@@ -26,4 +19,4 @@ const User = sequelize.define(
     { freezeTableName: true, paranoid: true }
 );
 
-export default User;
+export default Team;
