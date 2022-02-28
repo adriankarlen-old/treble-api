@@ -11,10 +11,24 @@ const Team = sequelize.define(
             allowNull: false,
             primaryKey: true,
         },
+        code: {
+            type: Sequelize.INTEGER,
+            allowNull: false,
+        },
         name: {
             type: Sequelize.STRING,
             allowNull: false,
         },
+        short_name: {
+            type: Sequelize.STRING,
+            allowNull: false,
+        },
+        form: {
+            type: Sequelize.INTEGER
+        },
+        strength: {
+            type: Sequelize.INTEGER
+        }
     },
     { freezeTableName: true, paranoid: true }
 );
