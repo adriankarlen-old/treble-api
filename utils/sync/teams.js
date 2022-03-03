@@ -1,29 +1,34 @@
-import Team from '../models/team.js';
+import Team from '../../models/team.js';
+import fetch from 'node-fetch';
 
 /**
  * Fetch all teams in FPL and add to database
  */
 const syncTeams = async () => {
-    await fetchTeams().then((teams) => () => {
-        teams.forEach(async (team) => {
-            const dbTeam = await Team.findOne({ where: { code: team.code } });
-            if (!dbTeam) {
-                await Team.create({
-                    code: team.code,
-                    name: team.name,
-                    short_name: team.short_name,
-                    strength: team.strength,
-                    form: team.form,
-                });
-            } else {
-                await Team.update({
-                    name: team.name,
-                    short_name: team.short_name,
-                    strength: team.strength,
-                    form: team.form,
-                });
-            }
-        });
+    console.log('Syncing teams...');
+    await fetchTeams().then((teams) => {
+        if (teams) {
+            teams.forEach(async (team) => {
+                const dbTeam = await Team.findOne({ where: { code: team.code } });
+                if (!dbTeam) {
+                    await Team.create({
+                        id: team.id,
+                        code: team.code,
+                        name: team.name,
+                        shortName: team.short_name,
+                        form: team.form,
+                        strength: team.strength
+                    });
+                } else {
+                    await Team.update({
+                        name: team.name,
+                        shortName: team.short_name,
+                        form: team.form,
+                        strength: team.strength
+                    });
+                }
+            });
+        }
     });
 };
 
@@ -35,3 +40,5 @@ const fetchTeams = async () => {
 
     return teams;
 };
+
+export default syncTeams;

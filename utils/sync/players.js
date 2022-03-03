@@ -1,61 +1,64 @@
-import Player from '../models/player.js';
+import Player from '../../models/player.js';
+import fetch from 'node-fetch';
 
 /**
  * Fetch all Premier League players in FPL and add to database
  */
 const syncPlayers = async () => {
-    await fetchPlayers().then((players) => () => {
+    await fetchPlayers().then((players) => {
         players.forEach(async (player) => {
-            const dbPlayer = await Player.findOne({ where: { id: player.id } });
+            const dbPlayer = await Player.findOne({ where: { code: player.code } });
             if (!dbPlayer) {
                 await Player.create({
                     id: player.id,
                     code: player.code,
-                    first_name: player.first_name,
-                    second_name: player.second_name,
-                    total_points: player.total_points,
-                    chance_of_playing_next_round: player.chance_of_playing_next_round,
-                    chance_of_playing_this_round: player.chance_of_playing_this_round,
-                    now_cost: player.now_cost,
+                    firstName: player.first_name,
+                    secondName: player.second_name,
+                    totalPoints: player.total_points,
+                    chanceOfPlayingNextRound: player.chance_of_playing_next_round,
+                    chanceOfPlayingThisRound: player.chance_of_playing_this_round,
+                    nowCost: player.now_cost,
                     form: player.form,
-                    goals_scored: player.goals_scored,
+                    goalsScored: player.goals_scored,
                     assists: player.assists,
-                    clean_sheets: player.clean_sheets,
-                    goals_conceded: player.goals_conceded,
-                    own_goals: player.own_goals,
-                    penalties_saved: player.penalties_saved,
-                    penalties_missed: player.penalties_missed,
-                    yellow_cards: player.yellow_cards,
-                    red_cards: player.red_cards,
-                    saves: player.saves
+                    cleanSheets: player.clean_sheets,
+                    goalsConceded: player.goals_conceded,
+                    ownGoals: player.own_goals,
+                    penaltiesSaved: player.penalties_saved,
+                    penaltiesMissed: player.penalties_missed,
+                    yellowCards: player.yellow_cards,
+                    redCards: player.red_cards,
+                    saves: player.saves,
+                    teamId: player.team
                 });
             } else {
                 await Player.update({
                     name: player.name,
-                    first_name: player.first_name,
-                    second_name: player.second_name,
-                    total_points: player.total_points,
-                    chance_of_playing_next_round: player.chance_of_playing_next_round,
-                    chance_of_playing_this_round: player.chance_of_playing_this_round,
-                    now_cost: player.now_cost,
+                    firstName: player.first_name,
+                    secondName: player.second_name,
+                    totalPoints: player.total_points,
+                    chanceOfPlayingNextRound: player.chance_of_playing_next_round,
+                    chanceOfPlayingThisRound: player.chance_of_playing_this_round,
+                    nowCost: player.now_cost,
                     form: player.form,
-                    goals_scored: player.goals_scored,
+                    goalsScored: player.goals_scored,
                     assists: player.assists,
-                    clean_sheets: player.clean_sheets,
-                    goals_conceded: player.goals_conceded,
-                    own_goals: player.own_goals,
-                    penalties_saved: player.penalties_saved,
-                    penalties_missed: player.penalties_missed,
-                    yellow_cards: player.yellow_cards,
-                    red_cards: player.red_cards,
-                    saves: player.saves
+                    cleanSheets: player.clean_sheets,
+                    goalsConceded: player.goals_conceded,
+                    ownGoals: player.own_goals,
+                    penaltiesSaved: player.penalties_saved,
+                    penaltiesMissed: player.penalties_missed,
+                    yellowCards: player.yellow_cards,
+                    redCards: player.red_cards,
+                    saves: player.saves,
+                    teamId: player.team
                 });
             }
         });
     });
 }
 
-fetchPlayers = async () => {
+const fetchPlayers = async () => {
     const players = await fetch('https://fantasy.premierleague.com/api/bootstrap-static/')
         .then((response) => response.json())
         .then((data) => data.elements)
@@ -63,3 +66,5 @@ fetchPlayers = async () => {
 
     return players;
 }
+
+export default syncPlayers;
