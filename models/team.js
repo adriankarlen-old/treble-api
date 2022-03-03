@@ -19,7 +19,7 @@ const Team = sequelize.define(
             type: Sequelize.STRING,
             allowNull: false,
         },
-        short_name: {
+        shortName: {
             type: Sequelize.STRING,
             allowNull: false,
         },

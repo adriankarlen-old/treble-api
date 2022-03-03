@@ -17,30 +17,28 @@ const Player = sequelize.define(
             type: Sequelize.INTEGER,
             allowNull: false,
         },
-        first_name: {
+        firstName: {
             type: Sequelize.STRING,
             allowNull: false,
         },
-        second_name: {
+        secondName: {
             type: Sequelize.STRING,
             allowNull: false,
         },
-        total_points: {
+        totalPoints: {
             type: Sequelize.INTEGER,
             allowNull: false,
             defaultValue: 0,
         },
-        chance_of_playing_next_round: {
+        chanceOfPlayingNextRound: {
             type: Sequelize.INTEGER,
-            allowNull: false,
             defaultValue: 0,
         },
-        chance_of_playing_this_round: {
+        chanceOfPlayingThisRound: {
             type: Sequelize.INTEGER,
-            allowNull: false,
             defaultValue: 0,
         },
-        now_cost: {
+        nowCost: {
             type: Sequelize.INTEGER,
             allowNull: false,
             defaultValue: 0,
@@ -50,7 +48,7 @@ const Player = sequelize.define(
             allowNull: false,
             defaultValue: 0,
         },
-        goals_scored: {
+        goalsScored: {
             type: Sequelize.INTEGER,
             allowNull: false,
             defaultValue: 0,
@@ -60,37 +58,37 @@ const Player = sequelize.define(
             allowNull: false,
             defaultValue: 0,
         },
-        clean_sheets: {
+        cleanSheets: {
             type: Sequelize.INTEGER,
             allowNull: false,
             defaultValue: 0,
         },
-        goals_conceded: {
+        goalsConceded: {
             type: Sequelize.INTEGER,
             allowNull: false,
             defaultValue: 0,
         },
-        own_goals: {
+        ownGoals: {
             type: Sequelize.INTEGER,
             allowNull: false,
             defaultValue: 0,
         },
-        penalties_saved: {
+        penaltiesSaved: {
             type: Sequelize.INTEGER,
             allowNull: false,
             defaultValue: 0,
         },
-        penalties_missed: {
+        penaltiesMissed: {
             type: Sequelize.INTEGER,
             allowNull: false,
             defaultValue: 0,
         },
-        yellow_cards: {
+        yellowCards: {
             type: Sequelize.INTEGER,
             allowNull: false,
             defaultValue: 0,
         },
-        red_cards: {
+        redCards: {
             type: Sequelize.INTEGER,
             allowNull: false,
             defaultValue: 0,
