@@ -1,6 +1,16 @@
 import Player from '../../models/player.js';
 import fetch from 'node-fetch';
 
+
+/**
+ * Fetch all Allsvenskan players and add to database
+ */
+const syncPlayersAllsvenskan = async () => {
+    const players = await fetch('https://api.allsvenskan.se/api/players')
+        .then(res => res.json())
+        .then(json => json.data);
+};
+
 /**
  * Fetch all Premier League players in FPL and add to database
  */
