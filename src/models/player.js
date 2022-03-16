@@ -1,7 +1,5 @@
 import { Sequelize } from 'sequelize';
-
 import sequelize from '../utils/database.js';
-
 import Team from './team.js';
 
 const Player = sequelize.define(
